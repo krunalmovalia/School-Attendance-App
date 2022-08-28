@@ -1,0 +1,27 @@
+package com.example.schoolattendanceapp.models;
+
+public class ClassItems {
+    private String className;
+    private String division;
+
+    public ClassItems(String className, String division) {
+        this.className = className;
+        this.division = division;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+}

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">School Attendance App</string>
+    <string name="add_new_class">Add New Class</string>
+    <string name="class_name">Class Name</string>
+    <string name="division">Division</string>
+    <string name="title">Title</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+</resources>
