@@ -1,6 +1,14 @@
 package com.example.schoolattendanceapp.models;
 
 public class ClassItems {
+    private long cid;
+
+    public ClassItems(long cid, String className, String division) {
+        this.cid = cid;
+        this.className = className;
+        this.division = division;
+    }
+
     private String className;
     private String division;
 
@@ -23,5 +31,13 @@ public class ClassItems {
 
     public void setDivision(String division) {
         this.division = division;
+    }
+
+    public long getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 }

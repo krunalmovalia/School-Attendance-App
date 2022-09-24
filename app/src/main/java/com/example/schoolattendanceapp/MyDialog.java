@@ -17,7 +17,9 @@ import androidx.fragment.app.DialogFragment;
 public class MyDialog extends DialogFragment {
 
     public static final String CLASS_ADD_DIALOG = "addClass";
+    public static final String CLASS_UPDATE_DIALOG = "updateClass";
     public static final String STUDENT_ADD_DIALOG = "addStudent";
+    public static final String STUDENT_UPDATE_DIALOG = "updateStudent";
 
     private OnClickListener listener;
     public interface OnClickListener{
@@ -34,8 +36,68 @@ public class MyDialog extends DialogFragment {
         Dialog dialog = null;
         if (getTag().equals(CLASS_ADD_DIALOG))dialog=getAddClassDialog();
         if (getTag().equals(STUDENT_ADD_DIALOG))dialog=getAddStudentDialog();
+        if (getTag().equals(CLASS_UPDATE_DIALOG))dialog=getUpdateClassDialog();
+        if (getTag().equals(STUDENT_UPDATE_DIALOG))dialog=getUpdateStudentDialog();
+
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         return dialog;
+    }
+
+    private Dialog getUpdateStudentDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dailog, null);
+        builder.setView(view);
+
+        TextView title = view.findViewById(R.id.titleDialog);
+        title.setText("Update Student Info");
+        EditText roll_edt = view.findViewById(R.id.edt01);
+        roll_edt.setHint("Enter Roll No.");
+        EditText name_edt = view.findViewById(R.id.edt02);
+        name_edt.setHint("Enter Name");
+
+        Button cancel = view.findViewById(R.id.cancel_btn);
+        Button add = view.findViewById(R.id.add_btn);
+        add.setText("update");
+
+        cancel.setOnClickListener(v -> dismiss());
+        add.setOnClickListener(v -> {
+            String roll = roll_edt.getText().toString();
+            String name = name_edt.getText().toString();
+            roll_edt.setText("");
+            name_edt.setText("");
+            listener.onClick(roll,name);
+        });
+
+        return builder.create();
+
+    }
+
+    private Dialog getUpdateClassDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dailog, null);
+        builder.setView(view);
+
+        TextView title = view.findViewById(R.id.titleDialog);
+        title.setText("Update Class Info");
+        EditText class_edt = view.findViewById(R.id.edt01);
+        class_edt.setHint("Class Name");
+        EditText division_edt = view.findViewById(R.id.edt02);
+        division_edt.setHint("Division");
+
+        Button cancel = view.findViewById(R.id.cancel_btn);
+        Button add = view.findViewById(R.id.add_btn);
+        add.setText("Update");
+
+        cancel.setOnClickListener(v -> dismiss());
+        add.setOnClickListener(v -> {
+            String className = class_edt.getText().toString();
+            String division = division_edt.getText().toString();
+            listener.onClick(className,division);
+            dismiss();
+        });
+
+        return builder.create();
     }
 
     private Dialog getAddStudentDialog() {
