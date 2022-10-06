@@ -19,6 +19,7 @@ import com.example.schoolattendanceapp.models.ClassItems;
 import com.example.schoolattendanceapp.models.StudentItem;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StudentActivity extends AppCompatActivity {
 
@@ -31,6 +32,8 @@ public class StudentActivity extends AppCompatActivity {
     private ArrayList<StudentItem> studentItems = new ArrayList<>();
     DbHelper dbHelper;
     private int cid;
+    private MyCalendar calendar;
+    private TextView subtitle;
 
 
     @Override
@@ -38,6 +41,7 @@ public class StudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
+        calendar = new MyCalendar();
         dbHelper = new DbHelper(this);
 
         Intent intent = getIntent();
@@ -45,6 +49,7 @@ public class StudentActivity extends AppCompatActivity {
         division = intent.getStringExtra("division");
         position = intent.getIntExtra("className",-1);
         cid = intent.getIntExtra("cid",-1);
+
 
         setToolbar();
         loadData();
@@ -55,6 +60,7 @@ public class StudentActivity extends AppCompatActivity {
         studentAdapter = new StudentAdapter(this, studentItems);
         recyclerView.setAdapter(studentAdapter);
         studentAdapter.setOnItemClickListener(position->changeStatus(position));
+        loadStatusData();
 
 
     }
@@ -84,23 +90,57 @@ public class StudentActivity extends AppCompatActivity {
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         TextView title = toolbar.findViewById(R.id.title_toolbar);
-        TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
+        subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
         ImageButton back = toolbar.findViewById(R.id.back);
         ImageButton save = toolbar.findViewById(R.id.save);
+        save.setOnClickListener(v -> saveStatus());
 
         title.setText(className);
-        subtitle.setText(division);
+        subtitle.setText(division+" | "+calendar.getDate());
         back.setOnClickListener(v -> onBackPressed());
         toolbar.inflateMenu(R.menu.student_menu);
         toolbar.setOnMenuItemClickListener(menuItem->onMenuItemSelected(menuItem));
 
     }
 
+    private void saveStatus() {
+        for (StudentItem studentItem : studentItems){
+            String  status = studentItem.getStatus();
+            if (!Objects.equals(status, "P")) status = "A";
+            long value = dbHelper.addStatus(studentItem.getSid(),calendar.getDate(),status);
+            if (value==-1)dbHelper.updateStatus(studentItem.getSid(),calendar.getDate(),status);
+        }
+    }
+
+    private void loadStatusData(){
+        for (StudentItem studentItem : studentItems){
+            String  status =dbHelper.getStatus(studentItem.getSid(),calendar.getDate());
+            if (status!=null) studentItem.setStatus(status);
+            else studentItem.setStatus("");
+        }
+        studentAdapter.notifyDataSetChanged();
+    }
+
     private boolean onMenuItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId()==R.id.add_student){
             showAddStudentDialog();
-        }
+            }
+        else if (menuItem.getItemId()==R.id.show_calendar){
+                showCalendar();
+            }
         return true;
+    }
+
+    private void showCalendar() {
+
+        calendar.show(getSupportFragmentManager(),"");
+        calendar.setOnCalendarOkClickListener(this::onCalendarOkClicked);
+    }
+
+    private void onCalendarOkClicked(int year, int month, int day) {
+        calendar.setDate(year, month, day);
+        subtitle.setText(division+" | "+calendar.getDate());
+        loadStatusData();
     }
 
     private void showAddStudentDialog() {
@@ -130,7 +170,7 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void showUpdateStudentDialog(int position) {
-        MyDialog dialog = new MyDialog();
+        MyDialog dialog = new MyDialog(studentItems.get(position).getRoll(),studentItems.get(position).getName());
         dialog.show(getSupportFragmentManager(),MyDialog.STUDENT_UPDATE_DIALOG);
         dialog.setListener((roll_string,name)->updateStudent(position,name));
 

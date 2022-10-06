@@ -22,6 +22,19 @@ public class MyDialog extends DialogFragment {
     public static final String STUDENT_UPDATE_DIALOG = "updateStudent";
 
     private OnClickListener listener;
+    private int roll;
+    private String name;
+
+    public MyDialog(int roll, String name) {
+
+        this.roll = roll;
+        this.name = name;
+    }
+
+    public MyDialog() {
+
+    }
+
     public interface OnClickListener{
         void onClick(String text1, String text2);
     }
@@ -59,14 +72,16 @@ public class MyDialog extends DialogFragment {
         Button cancel = view.findViewById(R.id.cancel_btn);
         Button add = view.findViewById(R.id.add_btn);
         add.setText("update");
-
+        roll_edt.setText(roll+"");
+        roll_edt.setEnabled(false);
+        name_edt.setText(name);
         cancel.setOnClickListener(v -> dismiss());
         add.setOnClickListener(v -> {
             String roll = roll_edt.getText().toString();
             String name = name_edt.getText().toString();
-            roll_edt.setText("");
-            name_edt.setText("");
+
             listener.onClick(roll,name);
+            dismiss();
         });
 
         return builder.create();
