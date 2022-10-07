@@ -12,21 +12,20 @@
     app:cardCornerRadius="4dp"
     android:id="@+id/cardview">
 
+
     <RelativeLayout
-        android:paddingLeft="36dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <RelativeLayout
+        android:paddingStart="36dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:padding="8dp">
+        android:padding="21dp"
+        android:paddingEnd="0dp">
 
         <TextView
             android:id="@+id/roll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="01"
+            android:text="@string/_01"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -35,23 +34,22 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Krunal"
+            android:text="@string/krunal"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginLeft="56dp"/>
+            android:layout_marginStart="56dp"/>
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="P"
+            android:text="@string/p"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="36dp"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="36dp"/>
 
-    </RelativeLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -6,4 +6,14 @@
     <string name="title">Title</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
+    <string name="to_add_new_class">To Add New Class</string>
+    <string name="edt01">edt01</string>
+    <string name="edt02">edt02</string>
+    <string name="_01">01</string>
+    <string name="krunal">Krunal</string>
+    <string name="p">P</string>
+    <string name="back_to_screen">back to screen</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="to_save_attendance">to save attendance</string>
+    <string name="jan_2022">Jan 2022</string>
 </resources>

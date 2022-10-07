@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DashboardActivity">
 
 
@@ -24,5 +25,6 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="24dp"
         android:src="@drawable/ic_add"
-        android:tintMode="add"/>
+        app:tint="@color/white"
+        android:contentDescription="@string/to_add_new_class" />
 </RelativeLayout>

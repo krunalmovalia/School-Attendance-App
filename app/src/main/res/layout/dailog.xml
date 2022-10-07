@@ -32,18 +32,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="edt01" />
+            android:hint="@string/edt01"
+            android:autofillHints="00"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/edt02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="edt02" />
+            android:hint="@string/edt02"
+            android:autofillHints="A"
+            android:inputType="text" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,13 +69,12 @@
                     android:id="@+id/add_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/rounded_button_colored"
                     android:text="@string/add"
                     android:textColor="@color/white"
                     android:layout_weight="0.33"/>
             </LinearLayout>
-        </RelativeLayout>
 
     </LinearLayout>
 
