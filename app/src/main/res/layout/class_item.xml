@@ -35,5 +35,14 @@
             android:textColor="@color/grey"/>
 
     </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingEnd="20sp"
+            android:textColor="@color/purple_700"
+            android:text="@string/take_attendance" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

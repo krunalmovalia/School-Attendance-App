@@ -16,4 +16,5 @@
     <string name="subtitle">Subtitle</string>
     <string name="to_save_attendance">to save attendance</string>
     <string name="jan_2022">Jan 2022</string>
+    <string name="take_attendance">Take Attendance</string>
 </resources>
