@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DbHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
-    //class table
+    //class TABLE
     private static final String CLASS_TABLE_NAME="CLASS_TABLE";
     public static final String C_ID= "C_ID";
     public static final String CLASS_NAME_KEY="CLASS_NAME";
@@ -31,7 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String SELECT_CLASS_TABLE = "SELECT * FROM "+CLASS_TABLE_NAME;
 
 
-    //STUDENT table
+    //STUDENT TABLE
     private static final String STUDENT_TABLE_NAME ="STUDENT_TABLE";
     public static final String S_ID ="_SID";
     public static final String STUDENT_NAME_KEY ="STUDENT_NAME";
@@ -50,7 +50,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String SELECT_STUDENT_TABLE = "SELECT * FROM " + STUDENT_TABLE_NAME;
 
 
-    //STATUS table
+    //STATUS TABLE
 
     private static final String STATUS_TABLE_NAME ="STATUS_TABLE";
     public static final String STATUS_ID ="_STATUS_ID";
@@ -99,7 +99,7 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-
+    //TO ADD CLASS
     long addClass(String className, String division){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -107,17 +107,17 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DIVISION_NAME_KEY,division);
         return database.insert(CLASS_TABLE_NAME,null,values);
     }
-
+    //DISPLAY CLASS TABLE
     Cursor getClassTable(){
         SQLiteDatabase database = this.getReadableDatabase();
         return database.rawQuery(SELECT_CLASS_TABLE,null);
     }
-
+    //TO DELETE CLASS
     int deleteClass(long cid){
         SQLiteDatabase database = this.getReadableDatabase();
         return database.delete(CLASS_TABLE_NAME,C_ID+"=?",new String[]{String.valueOf(cid)});
     }
-
+    //TO UPDATE CLASS
     long updateClass(long cid, String className, String division){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -125,7 +125,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DIVISION_NAME_KEY,division);
         return database.update(CLASS_TABLE_NAME,values,C_ID+"=?",new String[]{String.valueOf(cid)});
     }
-
+    //TO ADD STUDENT
     long addStudent(long cid,int roll , String name){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -140,19 +140,19 @@ public class DbHelper extends SQLiteOpenHelper {
         return database.query(STUDENT_TABLE_NAME,null,C_ID+"=?",new String[]{String.valueOf(cid)},null,null,STUDENT_ROLL_KEY);
 
     }
-
+    //TO DELETE STUDENT
     int deleteStudent(long sid){
         SQLiteDatabase database = this.getReadableDatabase();
         return database.delete(STUDENT_TABLE_NAME,S_ID+"=?",new String[]{String.valueOf(sid)});
     }
-
+    //TO UPDATE STUDENT
     long updateStudent(long sid, String name){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(STUDENT_NAME_KEY,name);
         return database.update(STUDENT_TABLE_NAME,values,S_ID+"=?",new String[]{String.valueOf(sid)});
     }
-
+    //TO INSERT DATA IN STATUS TABLE
     long addStatus(long sid,long cid,String date,String status){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -162,7 +162,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(STATUS_KEY,status);
         return database.insert(STATUS_TABLE_NAME,null,values);
     }
-
+    //TO UPDATE STATUS
     long updateStatus(long sid,String date,String status){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -170,7 +170,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String whereClause = DATE_KEY +"='"+date+"' AND "+S_ID+"="+sid;
         return database.update(STATUS_TABLE_NAME,values,whereClause,null);
     }
-
+    //GET VALUE
     String getStatus(long sid,String date){
         String status=null;
         SQLiteDatabase database = this.getReadableDatabase();
@@ -180,7 +180,7 @@ public class DbHelper extends SQLiteOpenHelper {
             status = cursor.getString(cursor.getColumnIndexOrThrow(STATUS_KEY));
         return status;
     }
-
+    //GET VALUE OF MONTH AND YEAR
     Cursor getDistinctMonths(long cid){
         SQLiteDatabase database = this.getReadableDatabase();
         return database.query(STATUS_TABLE_NAME,new String[]{DATE_KEY},C_ID+"="+cid,null,"substr("+DATE_KEY+",4,7)", null,null);

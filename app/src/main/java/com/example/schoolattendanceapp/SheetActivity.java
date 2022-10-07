@@ -24,6 +24,7 @@ public class SheetActivity extends AppCompatActivity {
 
     }
 
+    ////TO SHOW DATA IN TABULAR FORM
     private void showTable() {
         DbHelper dbHelper =  new DbHelper(this);
         TableLayout tableLayout = findViewById(R.id.table_layout);
@@ -34,7 +35,7 @@ public class SheetActivity extends AppCompatActivity {
 
         int DAY_IN_MONTH = getDayInMonth(month);
 
-        //row setup
+        //ROW SETUP
         int rowSize = idArray.length+1;
         TableRow[] rows = new TableRow[rowSize];
         TextView[] rolls_tvs = new TextView[rowSize];
@@ -49,7 +50,7 @@ public class SheetActivity extends AppCompatActivity {
             }
         }
 
-        //header
+        //HEADER
         rolls_tvs[0].setText("Roll");
         rolls_tvs[0].setTypeface(rolls_tvs[0].getTypeface(), Typeface.BOLD);
         name_tvs[0].setText("Name");
@@ -97,6 +98,7 @@ public class SheetActivity extends AppCompatActivity {
 
     }
 
+    //TO CONVERT DAY INTO MONTH
     private int getDayInMonth(String month) {
         int monthIndex = Integer.valueOf(month.substring(0,1));
         int year = Integer.valueOf(month.substring(4));

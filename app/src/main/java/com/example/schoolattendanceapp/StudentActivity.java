@@ -25,6 +25,7 @@ import java.util.Objects;
 
 public class StudentActivity extends AppCompatActivity {
 
+    //DECLARE THE COMPONENTS
     Toolbar toolbar;
     private String className, division;
     private int position;
@@ -46,6 +47,7 @@ public class StudentActivity extends AppCompatActivity {
         calendar = new MyCalendar();
         dbHelper = new DbHelper(this);
 
+        // MOVE VALUE TO NEXT ACTIVITY
         Intent intent = getIntent();
         className = intent.getStringExtra("className");
         division = intent.getStringExtra("division");
@@ -67,6 +69,7 @@ public class StudentActivity extends AppCompatActivity {
 
     }
 
+    //TO LOAD THE EXISTING STUDENT DATA
     private void loadData() {
         Cursor cursor = dbHelper.getStudentTable(cid);
         studentItems.clear();
@@ -79,6 +82,7 @@ public class StudentActivity extends AppCompatActivity {
         cursor.close();
     }
 
+    //TO MARK ABSENT AND PRESENT
     private void changeStatus(int position) {
         String status = studentItems.get(position).getStatus();
 
@@ -88,7 +92,7 @@ public class StudentActivity extends AppCompatActivity {
         studentItems.get(position).setStatus(status);
         studentAdapter.notifyItemChanged(position);
     }
-
+    //SET THE TOOLBAR
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         TextView title = toolbar.findViewById(R.id.title_toolbar);
@@ -106,6 +110,7 @@ public class StudentActivity extends AppCompatActivity {
 
     }
 
+    //TO STORE DATA OF PRESENT AND ABSENT IN DATABASE
     private void saveStatus() {
         for (StudentItem studentItem : studentItems){
             String  status = studentItem.getStatus();
@@ -115,6 +120,7 @@ public class StudentActivity extends AppCompatActivity {
         }
     }
 
+    //TO SHOW STORED DATA
     private void loadStatusData(){
         for (StudentItem studentItem : studentItems){
             String  status =dbHelper.getStatus(studentItem.getSid(),calendar.getDate());
@@ -124,6 +130,7 @@ public class StudentActivity extends AppCompatActivity {
         studentAdapter.notifyDataSetChanged();
     }
 
+    //MORE MENU
     private boolean onMenuItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId()==R.id.add_student){
             showAddStudentDialog();
@@ -137,6 +144,7 @@ public class StudentActivity extends AppCompatActivity {
         return true;
     }
 
+    //THROUGH INTENT DATA PASSING IN SHEET LIST
     private void openSheetList() {
         long[] idArray = new long[studentItems.size()];
         String[] nameArray = new String[studentItems.size()];
@@ -159,25 +167,28 @@ public class StudentActivity extends AppCompatActivity {
         intent.putExtra("nameArray",nameArray);
         startActivity(intent);
     }
-
+    //SHOW THE CALENDAR
     private void showCalendar() {
 
         calendar.show(getSupportFragmentManager(),"");
         calendar.setOnCalendarOkClickListener(this::onCalendarOkClicked);
     }
 
+    //TO SET CALENDER AND DIV DATA IN TOOLBAR
     private void onCalendarOkClicked(int year, int month, int day) {
         calendar.setDate(year, month, day);
         subtitle.setText(division+" | "+calendar.getDate());
         loadStatusData();
     }
 
+    //TO SHOW STUDENT ADD DIALOG
     private void showAddStudentDialog() {
         MyDialog dialog = new MyDialog();
         dialog.show(getSupportFragmentManager(),MyDialog.STUDENT_ADD_DIALOG);
         dialog.setListener((roll,name)->addStudent(roll,name));
     }
 
+    //TO ADD STUDENT
     private void addStudent(String roll_string, String name) {
         int roll =  Integer.parseInt(roll_string);
         long sid = dbHelper.addStudent(cid,roll,name);
@@ -198,6 +209,7 @@ public class StudentActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    //UPDATE STUDENT DETAILS DIALOG
     private void showUpdateStudentDialog(int position) {
         MyDialog dialog = new MyDialog(studentItems.get(position).getRoll(),studentItems.get(position).getName());
         dialog.show(getSupportFragmentManager(),MyDialog.STUDENT_UPDATE_DIALOG);
@@ -205,6 +217,7 @@ public class StudentActivity extends AppCompatActivity {
 
     }
 
+    //TO UPDATE STUDENT
     private void updateStudent(int position, String name) {
 
         dbHelper.updateStudent(studentItems.get(position).getSid(),name);
@@ -212,7 +225,7 @@ public class StudentActivity extends AppCompatActivity {
         studentAdapter.notifyItemChanged(position);
 
     }
-
+    //TO DELETE STUDENT
     private void deleteStudent(int position) {
         dbHelper.deleteStudent(studentItems.get(position).getSid());
         studentItems.remove(position);
