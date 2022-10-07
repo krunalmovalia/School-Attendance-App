@@ -23,6 +23,7 @@ public class MyCalendar extends DialogFragment {
         this.onCalendarOkClickListener = onCalendarOkClickListener;
     }
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MyCalendar extends DialogFragment {
             onCalendarOkClickListener.onClick(year,month,dayOfMonth);
         }),calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
     }
-
+//TO SET AND GET DATE
     void setDate(int year,int month,int day){
         calendar.set(Calendar.YEAR,year);
         calendar.set(Calendar.MONTH,month);

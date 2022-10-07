@@ -33,6 +33,7 @@ public class SheetListActivity extends AppCompatActivity {
         sheetList.setOnItemClickListener((parent, view, position, id) -> openSheetActivity(position));
     }
 
+    //PASSING SHEET LIST DATA INTO SHEET ACTIVITY THROUGH INTENT
     private void openSheetActivity(int position) {
         long[] idArray = getIntent().getLongArrayExtra("idArray");
         int[] rollArray = getIntent().getIntArrayExtra("rollArray");

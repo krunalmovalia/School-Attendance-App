@@ -56,6 +56,7 @@ public class MyDialog extends DialogFragment {
         return dialog;
     }
 
+    //TO UPDATE STUDENT DETAILS
     private Dialog getUpdateStudentDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -88,6 +89,7 @@ public class MyDialog extends DialogFragment {
 
     }
 
+    //TO UPDATE CLASS DETAILS
     private Dialog getUpdateClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dailog, null);
@@ -115,6 +117,7 @@ public class MyDialog extends DialogFragment {
         return builder.create();
     }
 
+    //TO ADD NEW STUDENTS
     private Dialog getAddStudentDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dailog, null);
@@ -142,6 +145,7 @@ public class MyDialog extends DialogFragment {
         return builder.create();
     }
 
+    //TO ADD NEW CLASSES
     private Dialog getAddClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dailog, null);

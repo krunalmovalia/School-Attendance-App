@@ -13,15 +13,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
+//3 SEC DELAY SCREEN
         Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent in = new Intent(getApplicationContext(), DashboardActivity.class);
-                startActivity(in);
-                finish();
-            }
+        h.postDelayed(() -> {
+            Intent in = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(in);
+            finish();
         },3000);
 
     }

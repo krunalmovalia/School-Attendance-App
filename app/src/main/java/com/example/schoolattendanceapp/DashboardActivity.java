@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 
 public class DashboardActivity extends AppCompatActivity {
-
+    //DECLARE COMPONENTS
     FloatingActionButton fab;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -38,8 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         dbHelper = new DbHelper(this);
-
-
+    //FETCH ALL COMPONENT IDS
         fab = findViewById(R.id.fab_main);
         fab.setOnClickListener(v -> showDialog());
         loadData();
@@ -55,6 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    //LOAD EXISTING CLASS DETAILS
     private void loadData() {
         Cursor cursor = dbHelper.getClassTable();
         classItems.clear();
@@ -66,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
             classItems.add(new ClassItems(id,className,division));
         }
     }
-
+    //SET TOOLBAR
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         TextView title = toolbar.findViewById(R.id.title_toolbar);
@@ -80,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
         save.setVisibility(View.INVISIBLE);
     }
 
+    //PASSING CLASS DATA INTO STUDENT ACTIVITY
     private void gotoItemActivity(int position) {
         Intent intent = new Intent(this, StudentActivity.class);
 
@@ -90,7 +91,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-
+    //SHOW CONTEXT DIALOG TO ADD CLASS
     private void showDialog() {
         MyDialog dialog = new MyDialog();
         dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALOG);
@@ -105,7 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
         classAdapter.notifyDataSetChanged();
 
     }
-
+    //SELECTED ITEM MENU FOR CLASS
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -117,7 +118,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
+    //UPDATE CLASS DETAILS
     private void showUpdateDialog(int position) {
         MyDialog dialog = new MyDialog();
         dialog.show(getSupportFragmentManager(),MyDialog.CLASS_UPDATE_DIALOG);
@@ -131,7 +132,7 @@ public class DashboardActivity extends AppCompatActivity {
         classAdapter.notifyItemChanged(position);
 
     }
-
+    //FOR DELETE CLASS
     private void deleteClass(int position) {
         dbHelper.deleteClass(classItems.get(position).getCid());
         classItems.remove(position);

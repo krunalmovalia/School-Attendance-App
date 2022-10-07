@@ -16,19 +16,19 @@ public class ClassItems {
         this.className = className;
         this.division = division;
     }
-
+    //CONSTRUCTOR OF GET CLASS
     public String getClassName() {
         return className;
     }
-
+    //CONSTRUCTOR OF SET CLASS
     public void setClassName(String className) {
         this.className = className;
     }
-
+    //CONSTRUCTOR OF GET DIVISION
     public String getDivision() {
         return division;
     }
-
+    //CONSTRUCTOR OF SET DIVISION
     public void setDivision(String division) {
         this.division = division;
     }
