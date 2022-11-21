@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SplashActivity"
     android:orientation="vertical"
     android:gravity="center">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"/>
 
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:src="@drawable/img"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        app:textAllCaps="true"
+        android:text="School Attendance App"
+        android:textColor="#0087D8"
+        android:textSize="20sp"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
